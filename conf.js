@@ -12,7 +12,7 @@ exports.hub = process.env.testnet ? 'obyte.org/bb-test' : 'obyte.org/bb';
 exports.enableNotificationDiscord = true;
 exports.aa_address = process.env.testnet ? "PCK3Z4QWQXG3FYB4OMENIJI3ZYMI5EEJ" : "PCK3Z4QWQXG3FYB4OMENIJI3ZYMI5EEJ";
 
-exports.discord_channel = process.env.discord_channel;
+exports.discord_channels = [process.env.discord_channel];
 exports.discord_token = process.env.discord_token;
 
 exports.token_registry_AA_address = "O6H6ZIFI57X3PLTYHOCVYPP5A553CYFQ"
