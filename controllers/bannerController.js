@@ -17,11 +17,6 @@ module.exports = bannerController = async (request, reply) => {
 
     reply.send(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${rulesNotForOwner.length === 0 ? 290 : 400} ${rulesNotForOwner.length === 0 ? 97 : 100 + ((rulesNotForOwner.length + 1) * 20)}" width="${rulesNotForOwner.length === 0 ? "300px" : "400px"}" height="${`${rulesNotForOwner.length === 0 ? 100 : 105 + ((rulesNotForOwner.length + 1) * 20)}px`}">
-        <defs>
-          <style type="text/css">
-            @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,500,700');
-          </style>
-        </defs>
         <rect rx="10" ry="10" stroke-linejoin="round" x="0" y="0" width="${rulesNotForOwner.length === 0 ? 285 : 400}" height="${rulesNotForOwner.length === 0 ? 97 : 100 + ((rulesNotForOwner.length + 1) * 20)}" fill="#ddd" />
         <rect rx="10" ry="10" stroke-linejoin="round" x="5" y="5" width="${rulesNotForOwner.length === 0 ? 275 : 390}" height="${rulesNotForOwner.length === 0 ? 87 : 90 + ((rulesNotForOwner.length + 1) * 20)}" fill="#fff" />
         <svg x="15" y="15" width="255" height="67" viewBox="0 0 255 67" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,14 +27,14 @@ module.exports = bannerController = async (request, reply) => {
 
         ${rulesNotForOwner.length !== 0 && `<g style="user-select: none; -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; color: #2D2C2C;">
           <line stroke-linecap="round" x1="15" y1="100" x2="80" y2="100" stroke-width="5" stroke="#ddd" />
-          <text x="100" font-family="Open Sans" className="unselectable" y="105">${truncate(fullName, 26)} - ${percentForOwner}%</text>
+          <text x="100" font-family="Segoe UI, Ubuntu, Sans-Serif" className="unselectable" y="105">${truncate(fullName, 26)} - ${percentForOwner}%</text>
         </g>`}
 
         ${rulesNotForOwner.map((r, i) => `<g>
           <line stroke-linecap="round" x1="32" y1="${100 + (i === rulesNotForOwner.length - 1 ? 20 : 22) * i}" x2="32" y2="${125 + (i === rulesNotForOwner.length - 1 ? 20 : 22) * i}" stroke-width="5" stroke="#ddd" />
           <line stroke-linecap="round" x1="32" y1="${120 + 20 * i}" x2="100" y2="${120 + 20 * i}" stroke-width="5" stroke="#ddd" />
-          <g style="user-select: none; -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; color: #2D2C2C;"><text font-family="Open Sans" font-weight="300" className="unselectable" x="120" y="${125 + 20 * i}">${truncate(r.repo, 24)} - ${r.percent}%</text></g>
-        </g>`)}
+          <g style="user-select: none; -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; color: #2D2C2C;"><text font-family="Segoe UI, Ubuntu, Sans-Serif" font-weight="300" className="unselectable" x="120" y="${125 + 20 * i}">${truncate(r.repo, 24)} - ${r.percent}%</text></g>
+        </g>`).join(" ")}
       </svg>
     `)
   }
