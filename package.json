@@ -1,11 +1,13 @@
 {
 	"name": "cascading-donations-backend",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Taump",
 	"license": "MIT",
 	"keywords": [
 		"discord",
-		"dag"
+		"dag",
+		"donations",
+		"github"
 	],
 	"scripts": {
 		"start": "node start.js",
@@ -13,10 +15,11 @@
 	},
 	"dependencies": {
 		"aabot": "git+https://github.com/byteball/aabot.git",
-		"ocore": "git+https://github.com/byteball/ocore.git",
 		"axios": "^0.24.0",
 		"discord.js": "^12.2.0",
 		"fastify": "^3.24.0",
-		"fastify-cors": "^6.0.2"
+		"fastify-cors": "^6.0.2",
+		"fastify-sensible": "^3.1.2",
+		"ocore": "git+https://github.com/byteball/ocore.git"
 	}
 }

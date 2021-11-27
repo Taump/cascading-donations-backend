@@ -5,11 +5,11 @@ const lightWallet = require('ocore/light_wallet.js');
 const wallet_general = require('ocore/wallet_general.js');
 const DAG = require('aabot/dag.js');
 const Discord = require('discord.js');
+
 const webserver = require('./webserver.js');
 const updater = require('./updater.js');
 
 var discordClient = null;
-
 
 lightWallet.setLightVendorHost(conf.hub);
 

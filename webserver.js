@@ -1,7 +1,10 @@
 const conf = require('ocore/conf.js');
 const fastify = require('fastify');
 const CORS = require('fastify-cors');
-const store = require('./store.js');
+const fastifySensible = require('fastify-sensible');
+
+const bannerController = require('./controllers/bannerController.js');
+const popularController = require('./controllers/popularController.js');
 
 // Create instance
 const fastifyInstance = fastify({ logger: false });
@@ -9,14 +12,14 @@ const fastifyInstance = fastify({ logger: false });
 // CORS
 fastifyInstance.register(CORS);
 
-// Declare a route
-fastifyInstance.get('/popular', async () => {
-  const data = store.get();
-  
-  return { data }
-})
+// register error generator
+fastifyInstance.register(fastifySensible);
 
-// Run the server!
+// Declare a routes
+fastifyInstance.get('/popular', popularController);
+fastifyInstance.get('/banner', bannerController);
+
+// Run the server
 module.exports = async () => {
   try {
     await fastifyInstance.listen(conf.webserverPort);

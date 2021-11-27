@@ -1,7 +1,9 @@
 const conf = require('ocore/conf.js');
-const store = require('./store.js');
 const DAG = require('aabot/dag.js');
+
+const store = require('./store.js');
 const githubAxiosInstance = require('./githubAxiosInstance.js')
+
 const limit = process.env.LIMIT_OF_POPULAR;
 
 module.exports = async () => {
@@ -32,7 +34,6 @@ function getRepoByFullName(full_name) {
     const data = res.data;
     return {
       full_name: data.full_name,
-      // owner: data.owner,
       description: data.description,
       language: data.language,
       stargazers_count: data.stargazers_count,
