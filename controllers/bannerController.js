@@ -19,7 +19,7 @@ module.exports = bannerController = async (request, reply) => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${rulesNotForOwner.length === 0 ? 290 : 400} ${rulesNotForOwner.length === 0 ? 97 : 100 + ((rulesNotForOwner.length + 1) * 20)}" width="${rulesNotForOwner.length === 0 ? "300px" : "400px"}" height="${`${rulesNotForOwner.length === 0 ? 100 : 105 + ((rulesNotForOwner.length + 1) * 20)}px`}">
         <defs>
           <style type="text/css">
-            @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400italic,500,500italic,700,700italic,900,900italic');
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,500,700');
           </style>
         </defs>
         <rect rx="10" ry="10" stroke-linejoin="round" x="0" y="0" width="${rulesNotForOwner.length === 0 ? 285 : 400}" height="${rulesNotForOwner.length === 0 ? 97 : 100 + ((rulesNotForOwner.length + 1) * 20)}" fill="#ddd" />
