@@ -13,6 +13,7 @@ module.exports = bannerController = async (request, reply) => {
     
     reply.headers({
       'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'max-age=3600'
     })
 
     reply.send(`
