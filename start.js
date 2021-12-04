@@ -7,7 +7,8 @@ const DAG = require('aabot/dag.js');
 const Discord = require('discord.js');
 
 const webserver = require('./webserver.js');
-const updater = require('./updater.js');
+const updater = require('./popularRepoUpdater.js');
+const getTokens = require('./getTokens');
 
 var discordClient = null;
 
@@ -61,6 +62,7 @@ async function start() {
 
 	webserver();
 	updater();
+	getTokens();
 	setInterval(lightWallet.refreshLightClientHistory, 60 * 1000);
 }
 

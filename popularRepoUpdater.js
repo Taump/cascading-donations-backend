@@ -1,7 +1,7 @@
 const conf = require('ocore/conf.js');
 const DAG = require('aabot/dag.js');
 
-const store = require('./store.js');
+const store = require('./popularRepoStore.js');
 const githubAxiosInstance = require('./githubAxiosInstance.js')
 
 const limit = process.env.LIMIT_OF_POPULAR;

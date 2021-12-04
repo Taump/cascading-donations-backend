@@ -23,4 +23,7 @@ exports.webserverPort = process.env.webserverPort;
 exports.github_client_id = process.env.github_client_id;
 exports.github_secret_key = process.env.github_secret_key;
 
+exports.token_price_url = process.env.testnet ? "https://testnet.ostable.org/r/prices" : "https://referrals.ostable.org/prices";
+exports.bridge_url = process.env.testnet ? "https://testnet-bridge.counterstake.org/api/bridges" : "https://testnet.ostable.org/r/prices";
+
 console.log('finished server conf');

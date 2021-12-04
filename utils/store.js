@@ -1,5 +1,5 @@
-function Store() {
-  this.data = [];
+module.exports = function Store(initial = []) {
+  this.data = initial;
 
   this.update = (data) => {
     this.data = data;
@@ -9,5 +9,3 @@ function Store() {
     return this.data;
   }
 }
-
-module.exports = new Store;
