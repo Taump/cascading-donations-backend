@@ -14,6 +14,9 @@ var discordClient = null;
 
 lightWallet.setLightVendorHost(conf.hub);
 
+let updaterIntervalId;
+let refreshIntervalId;
+
 eventBus.on('connected', function (ws) {
 	network.initWitnessesIfNecessary(ws, start);
 });
@@ -63,7 +66,12 @@ async function start() {
 	webserver();
 	updater();
 	getTokens();
-	setInterval(lightWallet.refreshLightClientHistory, 60 * 1000);
+
+	if (refreshIntervalId) clearInterval(refreshIntervalId);
+	refreshIntervalId = setInterval(lightWallet.refreshLightClientHistory, 60 * 1000);
+
+	if (updaterIntervalId) clearInterval(intervalId);
+	updaterIntervalId = setInterval(updater, 60 * 60 * 1000);
 }
 
 

@@ -1,6 +1,7 @@
 # Server side for Obyte cascading donation
 - Output of popular repositories.
 - Output of supported tokens.
+- Github search wrapper
 - Discord notifications for new donations.
 
 **Important:** works only with NodeJS version 11.

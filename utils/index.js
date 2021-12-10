@@ -1,6 +1,8 @@
 const DAG = require('aabot/dag.js');
 const conf = require('ocore/conf.js');
 
+const githubAxiosInstance = require('../githubAxiosInstance');
+
 exports.getRules = async (fullName) => {
   try {
     let rules = await DAG.readAAStateVars(conf.aa_address, `${fullName}*rules`).then(vars => vars[`${fullName}*rules`]) || {};
@@ -24,4 +26,18 @@ exports.getRules = async (fullName) => {
     console.error(e);
     return ({})
   }
+}
+
+exports.searchRequest = async (query) => {
+  const [owner, name] = query.split("/");
+  let q = query;
+  
+  if (owner && name) {
+    q = `user:${owner} ${name}`
+  }
+
+  return githubAxiosInstance.get(`/search/repositories?q=${encodeURIComponent(q)}`).then((res) => {
+    const items = res.data.items;
+    return items.map((item) => ({ title: item.full_name, description: item.description }))
+  });
 }

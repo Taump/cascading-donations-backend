@@ -6,6 +6,7 @@ const fastifySensible = require('fastify-sensible');
 const bannerController = require('./controllers/bannerController.js');
 const popularController = require('./controllers/popularController.js');
 const tokensController = require('./controllers/tokensController.js');
+const searchController = require('./controllers/searchController.js');
 
 // Create instance
 const fastifyInstance = fastify({ logger: false });
@@ -20,6 +21,7 @@ fastifyInstance.register(fastifySensible);
 fastifyInstance.get('/popular', popularController);
 fastifyInstance.get('/banner', bannerController);
 fastifyInstance.get('/tokens', tokensController);
+fastifyInstance.get('/search', searchController);
 
 // Run the server
 module.exports = async () => {
