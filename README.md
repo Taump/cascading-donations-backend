@@ -23,11 +23,3 @@ Copy the appropriate .env.XXXX file to .env and changing it
 ```sh
 yarn start
 ```
-
-## dev
-
-```sh
-yarn global add nodemon
-
-yarn dev
-```

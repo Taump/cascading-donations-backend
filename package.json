@@ -10,8 +10,7 @@
 		"github"
 	],
 	"scripts": {
-		"start": "node start.js",
-		"dev": "nodemon start.js"
+		"start": "node start.js"
 	},
 	"dependencies": {
 		"aabot": "git+https://github.com/byteball/aabot.git",
