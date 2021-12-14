@@ -29,31 +29,35 @@ eventBus.on('aa_response', async function (objResponse) {
 
 	if (responseVars && responseVars.message && responseVars.message.includes("Successful donation to ")) {
 		const repository = responseVars.message.split(" ")[3];
-		const donor = objResponse.trigger_address;
-		const donatedVarName = Object.keys(responseVars).find(v => v.includes("donated_in_"));
-		const asset = donatedVarName.split("_")[2];
-		const amount = responseVars[donatedVarName];
-		const unit = objResponse.response.unit;
-		const symbol = asset === "base" ? "GBYTE" : await getSymbol(asset);
-		const decimals = asset === "base" ? 9 : await getDecimal(asset);
+		const owner = repository.split("/")[0];
 
-		const embed = new Discord.MessageEmbed()
-			.setAuthor(`Obyte cascading donation`)
-			.setTitle(`New donation`)
-			.setColor('#0099ff')
-			.setDescription(`You can support this repository using [website](${conf.frontend_url}/repo/${repository})`)
-			.setURL(`https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${unit}`)
-			.addFields({ name: "Donor", value: `[${donor}](${`https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${donor}`})` })
-			.addFields({ name: "Repository", value: `[${repository}](https://github.com/${repository})` })
-			.addFields({ name: "Amount", value: `${amount / 10 ** decimals} ${asset === "base" ? symbol : `[${symbol}](https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${asset})`}` })
-			.setThumbnail(`https://avatars.githubusercontent.com/${repository.split("/")[0]}`)
+		if (conf.allowedRepos.includes(repository) || conf.allowedUsers.includes(owner)) {
+			const donor = objResponse.trigger_address;
+			const donatedVarName = Object.keys(responseVars).find(v => v.includes("donated_in_"));
+			const asset = donatedVarName.split("_")[2];
+			const amount = responseVars[donatedVarName];
+			const trigger_unit = objResponse.trigger_unit;
+			const symbol = asset === "base" ? "GBYTE" : await getSymbol(asset);
+			const decimals = asset === "base" ? 9 : await getDecimal(asset);
 
-		sendToDiscord(embed);
+			const embed = new Discord.MessageEmbed()
+				.setAuthor(`Kivach - cascading donations`)
+				.setTitle(`New donation`)
+				.setColor('#0037ff')
+				.addFields(
+					{ name: "Donor", value: `[${donor}](${`https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${donor}`})` },
+					{ name: "Repository", value: `[${repository}](https://github.com/${repository})` },
+					{ name: "Amount", value: `[${amount / 10 ** decimals} ${symbol}](https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${trigger_unit})` },
+					{ name: "\u200B", value: `You can also [support](${conf.frontend_url}/repo/${repository}) this repository`, inline: true }
+					)
+				.setThumbnail(`https://avatars.githubusercontent.com/${repository.split("/")[0]}`)
+			sendToDiscord(embed);
+		}
 	}
 });
 
 async function start() {
-	if (conf.enableNotificationDiscord){
+	if (conf.enableNotificationDiscord) {
 		await initDiscord();
 		wallet_general.addWatchedAddress(conf.aa_address, function (error) {
 			if (error)
@@ -96,7 +100,7 @@ async function initDiscord() {
 }
 
 function setBotActivity() {
-	discordClient.user.setActivity("cascading donations", { type: "WATCHING" });
+	discordClient.user.setActivity("Kivach", { type: "WATCHING" });
 }
 
 
@@ -105,7 +109,7 @@ function sendToDiscord(to_be_sent) {
 		return console.log("discord client not initialized");
 	conf.discord_channels.forEach(function (channelId) {
 		discordClient.channels.fetch(channelId).then(function (channel) {
-			channel.send(to_be_sent);
+			if (channel) channel.send(to_be_sent);
 		});
 	});
 }
