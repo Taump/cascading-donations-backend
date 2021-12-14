@@ -41,8 +41,7 @@ eventBus.on('aa_response', async function (objResponse) {
 			const decimals = asset === "base" ? 9 : await getDecimal(asset);
 
 			const embed = new Discord.MessageEmbed()
-				.setAuthor(`Kivach - cascading donations`)
-				.setTitle(`New donation`)
+				.setAuthor(`New donation`)
 				.setColor('#0037ff')
 				.addFields(
 					{ name: "Donor", value: `[${donor}](${`https://${conf.testnet ? "testnet" : ""}explorer.obyte.org/#${donor}`})` },
